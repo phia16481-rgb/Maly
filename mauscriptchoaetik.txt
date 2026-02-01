@@ -85,18 +85,20 @@ local char = plr.Character or plr.CharacterAdded:Wait()
 local hrp = char:WaitForChild("HumanoidRootPart")
 
 _G.AutoFarm = true
-local MOB_NAME = "Mob" -- đổi tên mob cho đúng game
+local MOB_NAME = "Mob" -- ⚠️ đổi tên mob cho đúng game
 
 while _G.AutoFarm do
-    for _, mob in pairs(workspace:GetDescendants()) do
-        if mob.Name == MOB_NAME 
-        and mob:FindFirstChild("Humanoid") 
-        and mob:FindFirstChild("HumanoidRootPart")
-        and mob.Humanoid.Health > 0 then
+    pcall(function()
+        for _, mob in pairs(workspace:GetDescendants()) do
+            if mob.Name == MOB_NAME
+            and mob:FindFirstChild("Humanoid")
+            and mob:FindFirstChild("HumanoidRootPart")
+            and mob.Humanoid.Health > 0 then
 
-            hrp.CFrame = mob.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
-            mob.Humanoid.Health = 0
+                hrp.CFrame = mob.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
+                mob.Humanoid.Health = 0
+            end
         end
-    end
-    task.wait(0.25)
+    end)
+    task.wait(0.3)
 end
